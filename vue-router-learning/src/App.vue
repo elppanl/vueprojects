@@ -65,6 +65,10 @@ export default {
 	left: 1px;
 }
 
+.btn2{
+  margin-top: 20px;
+}
+
 /*设置路由切换时的动画效果 .fade和transition标签里的name属性的值对应*/
 .fade-enter {  /*进入前的状态*/
   opacity:0;
