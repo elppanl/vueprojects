@@ -49,14 +49,16 @@ export default {
   margin-top: 60px;
 }
 .btn1{
-	border: 1px solid #2c3e50;
+	border: 1px solid #e9e9e9;
+  color: #5c6b77;
+  font-weight: 600;
 	border-radius: 5px;
 	padding: 15px;
 	text-decoration: none;
 	position: relative;
 }
 .btn1:hover{
-	background-color: lightgray;
+	background-color: #f7f7f7;
 }
 .btn1:active{
 	top: 1px;
