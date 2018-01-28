@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表单案例</title>
+    <style>
+        #input{
+            background-color:lightgoldenrodyellow;
+            padding-top: 30px;
+            padding-bottom: 20px;
+            margin-bottom: 15px;
+        }
+        table{
+            width: 70%;
+            margin-left: 15%;
+            margin-right: 15%;
+            text-align: center;
+            border: 1px solid #e9e9e9;
+            border-collapse: collapse;
+            border-spacing: 0;
+            empty-cells:show;
+        }
+        form{
+            width: 70%;
+            margin-left: 15%;
+            margin-right: 15%;
+            text-align: center;
+        }
+        th,td{
+            padding:8px 16px;
+            border:1px solid #e9e9e9;
+            text-align: center;
+        }
+        th{
+            background: #f7f7f7;
+            color: #5c6b77;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="input">
+            <form action="#">
+                <label for="name">姓名</label>
+                <input type="text" id="name" v-model="inputs.name">
+                <label for="sax">性别</label>
+                <input type="text" id="sax" v-model="inputs.sax">
+                <label for="name">年龄</label>
+                <input type="age" id="age" v-model="inputs.age">
+                <input type="button" value="提交" @click="inp">
+            </form>
+        </div>
+        <div id="output">
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>年龄</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item,index) in rlist">
+                        <td>{{index+1}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.sax}}</td>
+                        <td>{{item.age}}</td>
+                        <td><button @click="dell(index)">删除</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- <script src="js/vue.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app=new Vue({
+            el:'#app',
+            data:{
+                rlist:[
+                    {"name":"张三", "sax":"男", "age":39},
+                    {"name":"李四", "sax":"女", "age":29},
+                    {"name":"王五", "sax":"男", "age":22}
+                ],
+                inputs:{}
+            },
+            methods:{
+                inp(){
+                    console.log(this.inputs);
+                    //this.rlist.push(this.inputs);
+                    // 问题：
+                    // 如果使用this.rlist.push(this.inputs)，点击提交按钮后，对象this.inputs会插入到this.rlist数组中，前台表格显示也正常（增加了一行记录）。
+                    // 但是！如果再次修改input时，刚才插入的表格内容也会随着input变化
+                    // 分析：
+                    // 按道理，input中的v-model绑定的是this.inputs,和this.rlist是没有直接关系的。但为什么插入记录后修改input会直接影响this.rlist呢？
+                    // 因此想了个以下的笨方法,请问是否有更好的解决办法？  
+                    var cheng={};
+                    cheng.name=this.inputs.name;
+                    cheng.sax=this.inputs.sax;
+                    cheng.age=this.inputs.age;              
+                    this.rlist.push(cheng);
+                    cheng=null;
+                },
+                dell(ind){
+                    this.rlist.splice(ind, 1);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
