@@ -1,3 +1,9 @@
 body{
     background-color: lightgreen;
 }
+
+#tupian{
+   background-image: url(../images/tu1.JPEG);
+   width:300px;
+   height:300px;
+}
